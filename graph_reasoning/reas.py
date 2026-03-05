@@ -28,6 +28,6 @@ def get_results(source, target):
     df = get_paths(source, target, state)
     prompt = build_prompt(df, state, config, source, target)
     
-    client = OpenAI(api_key=config["api_key"], base_url="https://dashscope-intl.aliyuncs.com/compatible-mode/v1")
+    client = OpenAI(api_key=config["api_key"], base_url=config["llm_base_url"])
     completion = client.chat.completions.create(model="qwen3-max", messages=[{"role": "user", "content": prompt}])
     return completion.choices[0].message.content
